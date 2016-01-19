@@ -1,0 +1,34 @@
+#slideout {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100%;
+    padding: 12px 0;
+    text-align: center;
+    background: #eee;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+
+}
+
+#slideout_inner {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    background: #eee;
+    width: 200px;
+    padding: 25px;
+    height: 100%;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    text-align: left;
+}
+
+#slideout:hover #slideout_inner {
+    right: 0;
+}
