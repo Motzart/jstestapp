@@ -1,5 +1,4 @@
 var Router = {
-    URL: window.location.href,
 
     routes: {
         "http://album.loc/": "indexPage",
@@ -21,7 +20,6 @@ var Router = {
         var i = this._routes.length;
         while (i--) {
             var args = path.match(this._routes[i].pattern);
-            console.log(args);
             if (args) {
                 this._routes[i].callback.apply(this, args.slice(1));
             }
@@ -44,7 +42,6 @@ var Router = {
     albumPage: function (id) {
         var source = $('#single-album').html();
         var template = Handlebars.compile(source);
-        console.log(localStorage.getItem(id));
         var html = template(getOneAlbumFromLS(id));
 
         $('#album').html(html);

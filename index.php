@@ -82,8 +82,6 @@
     </div>
 </script>
 <script>
-
-    //saveImage();
     var nId = 1;
     $('body').on('click', '#submitForm', function (e) {
         e.preventDefault();
@@ -101,12 +99,11 @@
         }
         form.trigger('reset');
 
-
         var fileInput = $('#cover')[0];
-        console.log(fileInput);
         var file = fileInput.files[0];
         var reader = new FileReader();
         var albumImage;
+
         reader.onload = function (e) {
             var img = new Image();
             img.src = reader.result;
@@ -130,24 +127,6 @@
     function getAlbum(id) {
         return localStorage.getItem(id);
     }
-
-
-//    function saveImage() {
-//        $('body').on("change", '#cover', function () {
-//            var fileInput = $(this)[0];
-//            var file = fileInput.files[0];
-//            var reader = new FileReader();
-//
-//            reader.onload = function (e) {
-//                var img = new Image();
-//                img.src = reader.result;
-//                localStorage.theImage = reader.result; //stores the image to localStorage
-//            };
-//
-//            reader.readAsDataURL(file);
-//
-//        });
-//    }
 
     function clearLocalStorage() {
         window.localStorage.clear();
