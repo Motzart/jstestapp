@@ -50,7 +50,7 @@
                 <input type="text" class="form-control" id="InputTitle" placeholder="Title">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Author</label>
+                <label >Author</label>
                 <input type="text" class="form-control" id="InputAuthor" placeholder="Author">
             </div>
             <div class="text-center">
@@ -72,6 +72,7 @@
 <script id="single-album" type="text/x-handlebars-template">
     <div class="row">
         <div class="col-md-12">
+            <h2>Single Album</h2>
             <h1>{{title}}</h1>
             <h3>{{author}}</h3>
             <div class="body">
@@ -82,7 +83,7 @@
 </script>
 <script>
 
-    saveImage();
+    //saveImage();
     var nId = 1;
     $('body').on('click', '#submitForm', function (e) {
         e.preventDefault();
@@ -90,20 +91,35 @@
         var form = $('#album-form');
         var Title = $('#InputTitle').val();
         var Author = $('#InputAuthor').val();
+
+
         if ($("#InputTitle").val() == '') {
 
             $('#alert').html("<strong>Warning!</strong>You left title entry");
             $('#alert').fadeIn().delay(1000).fadeOut();
             return false;
         }
-
         form.trigger('reset');
+
+
+        var fileInput = $('#cover')[0];
+        console.log(fileInput);
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+        var albumImage;
+        reader.onload = function (e) {
+            var img = new Image();
+            img.src = reader.result;
+            albumImage = reader.result; //stores the image to localStorage
+        };
+
+        reader.readAsDataURL(file);
 
         var album = {
             id: nId,
             title: Title,
             author: Author,
-            file: null
+            file: albumImage
         };
 
         var jsonAlbum = JSON.stringify(album);
@@ -116,22 +132,22 @@
     }
 
 
-    function saveImage() {
-        $('body').on("change", '#cover', function () {
-            var fileInput = $(this)[0];
-            var file = fileInput.files[0];
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                var img = new Image();
-                img.src = reader.result;
-                localStorage.theImage = reader.result; //stores the image to localStorage
-            };
-
-            reader.readAsDataURL(file);
-
-        });
-    }
+//    function saveImage() {
+//        $('body').on("change", '#cover', function () {
+//            var fileInput = $(this)[0];
+//            var file = fileInput.files[0];
+//            var reader = new FileReader();
+//
+//            reader.onload = function (e) {
+//                var img = new Image();
+//                img.src = reader.result;
+//                localStorage.theImage = reader.result; //stores the image to localStorage
+//            };
+//
+//            reader.readAsDataURL(file);
+//
+//        });
+//    }
 
     function clearLocalStorage() {
         window.localStorage.clear();

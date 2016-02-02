@@ -2,9 +2,9 @@ var Router = {
     URL: window.location.href,
 
     routes: {
-        "http://album.loc/"          :  "indexPage",
-        "http://album.loc/add"       :  "addPage",
-        "http://album.loc/album/:id" :  "albumPage"
+        "http://album.loc/": "indexPage",
+        "http://album.loc/add": "addPage",
+        "http://album.loc/album/:id": "albumPage"
     },
 
     init: function () {
@@ -45,11 +45,16 @@ var Router = {
         var source = $('#single-album').html();
         var template = Handlebars.compile(source);
         console.log(localStorage.getItem(id));
-        var html = template(localStorage.getItem(id));
+        var html = template(getOneAlbumFromLS(id));
+
         $('#album').html(html);
 
     }
 };
+
+function getOneAlbumFromLS(id) {
+    return JSON.parse(localStorage.getItem(id))
+}
 
 function getAllAlbumFromLS() {
 
